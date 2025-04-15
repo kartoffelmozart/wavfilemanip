@@ -48,36 +48,36 @@ class FourierTransformation:
             self.findLocalMaxima()
         return map(
             lambda pair:frequency_to_tone.get(
-                frequency_set.closestKey(pair[1])) , 
+                frequency_set.closestKey(pair.value)) , # pair.value from local_maxima is a frequency
                 self.local_maxima[-n:]
             )
 
     def findLocalMaxima(self): # fpm means frequency_prevalence_map
         local_maxima = set()
-        if self.ftp[0][1] > self.ftp[1][1]:
+        if self.ftp[0].value > self.ftp[1].value:
             local_maxima.add(self.ftp[0])
-        if self.ftp[1][1] > self.ftp[0][1] and \
-        self.ftp[1][1] > self.ftp[2][1]:
+        if self.ftp[1].value > self.ftp[0].value and \
+        self.ftp[1].value > self.ftp[2].value:
             local_maxima.add(self.ftp[1])
-        if self.ftp[-1][1] > self.ftp[-2][1]:
+        if self.ftp[-1].value > self.ftp[-2].value:
             local_maxima.add(self.ftp[-1])
-        if self.ftp[-2][1] > self.ftp[-1][1] and \
-       self.ftp[-2][1] > self.ftp[-3][1]:
+        if self.ftp[-2].value > self.ftp[-1].value and \
+       self.ftp[-2].value > self.ftp[-3].value:
             local_maxima.add(self.ftp[-2])
         for i in range(2,len(self.ftp)-2):
             pair1,pair2,pair3,pair4,pair5 = self.ftp[i-2:i+3]
-            if pair3[1] > pair2[1] and pair3[1] > pair4[1]:
+            if pair3.value > pair2.value and pair3.value > pair4.value:
                 local_maxima.add(pair3)
-            elif pair3[1] == pair2[1]:
-                if pair2[1] > pair1[1]:
+            elif pair3.value == pair2.value:
+                if pair2.value > pair1.value:
                     local_maxima.add(pair2)
-            elif pair3[1] == pair4[1]:
-                if pair4[1] > pair5[1]:
+            elif pair3.value == pair4.value:
+                if pair4.value> pair5.value:
                     local_maxima.add(pair3)
         prevelencies,frequencies = [],[]
         for pair in local_maxima:
-            prevelencies.append(pair[1])
-            frequencies.append(pair[0])
+            prevelencies.append(pair.value)
+            frequencies.append(pair.key)
         self.local_maxima = BinSearchKVPair(prevelencies,frequencies)
 
     @classmethod
@@ -116,7 +116,7 @@ class FourierOnRange(BinSearchKVPair):
         super().__init__(times,fts)
 
     def prevelantNotesAt(self , t , n_notes):
-        return self.closestPair(t)[1].mostPrevelant(n_notes)
+        return self.get(t).mostPrevelant(n_notes)
     
     def showTransformationAt(self , t , marks=[]):
         tf = self.closestPair(t)[1]

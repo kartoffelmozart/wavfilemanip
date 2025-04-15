@@ -67,7 +67,6 @@ class WavFile(FileMethods):
         if start is None: start = 0
         if end is None: end = len(self.sound_data)
         duration_in_seconds = (end-start) / self.sampleRate() / 4
-        print(duration_in_seconds)
 
         X = np.linspace(0,duration_in_seconds,(end-start)//4)
         sin  = np.sin(X*freq*2*np.pi)*20
@@ -137,9 +136,14 @@ class WavFile(FileMethods):
     def byteToTime(self , b):
         return b / self.samplerate() / 4
     
-    def fourierRange(self , start_time = 0 , end_time = None , sample_duration = .05 , frequency_range = (16.5,8000) , n_frequencies=10000):
-        if end_time is None: end_time = self.duration() - start_time
+    def fourierRange(self , 
+                     start_time = 0 , 
+                     end_time = None , 
+                     sample_duration = .05 , 
+                     frequency_range = (16.5,8000) , 
+                     n_frequencies=10000):
         
+        if end_time is None: end_time = self.duration() - start_time
         signal = self.spanToSignals(start_time,end_time,True)
         return FourierOnRange(
             signal,

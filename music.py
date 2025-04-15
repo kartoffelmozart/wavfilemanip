@@ -32,6 +32,21 @@ frequency_set = BinSearchKVPair(list(frequency_to_tone.keys()))
 def getFrequencies(n_freqs,min_freq,max_freq):
     return list(np.exp(np.linspace(0,np.log(max_freq/min_freq),n_freqs))*min_freq)
 
+class SheetMusic:
+    # final representation of a completed sheet of music
+    # contains staves and global information such as tempo, key and time signature
+    def __init__(self):
+        self.staves = []
+
+class Staff: 
+    # a track to be written on a sheet
+    #
+    def __init__(self):
+        self.sequential_events = []
+        self.timed_effects = []
+
+class SequentialEvent:
+    def __init__(self , start_beat , length): pass
 
 
 class Tone:
