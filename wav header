@@ -1,0 +1,11 @@
+0-4: 'RIFF'
+4-8: length in bytes - 8 (length of remaining file)
+8-12: 'WAVE'
+12-16: 'fmt'([102,109,116,32])
+16-20: [16,0,0,0]
+20-24: [1,0,2,0]
+24-28: sample rate. 44100 or 22050
+28-32: sample rate 4
+32-36: [4,0,16,0]
+36-40: 'data'
+40-end: audio data
