@@ -83,14 +83,17 @@ class FourierTransformation:
     @classmethod
     def of(cls , signal , frequencies , sample_duration):
         T = LinspaceFactory.getLinspace(0,sample_duration,signal.shape[0]) # T is the time-axis
-        prevelancies = []
-        for freq in frequencies:
-            prevelancies.append(cls.findPrevelanceOfFrequency(signal,freq,T))
+        if isinstance(frequencies , np.ndarray):
+            prevelancies = cls.findPrevelanceOfFrequency(signal , frequencies , T)
+        else:
+            prevelancies = []
+            for freq in frequencies:
+                prevelancies.append(cls.findPrevelanceOfFrequency(signal,freq,T))
         return cls(BinSearchKVPair(frequencies,prevelancies))
     
     @classmethod
     def findPrevelanceOfFrequency(cls,signal,freq,T):
-        return np.abs((signal * np.exp(2 * np.pi * 1j * freq * T)).sum())
+        return np.abs((signal * np.exp(2 * np.pi * 1j * freq * T)).sum(axis=1))
 
 
 class FourierOnRange(BinSearchKVPair):
@@ -105,7 +108,8 @@ class FourierOnRange(BinSearchKVPair):
                 ):
         
         sample_length = int(signal.shape[0] / (end_time - start_time) * sample_duration)
-        frequencies = getFrequencies(n_frequencies , *frequency_range)
+        frequencies = np.array(list(frequency_set.keys()))#getFrequencies(n_frequencies , *frequency_range)
+        frequencies.shape += (1,)
         fts = []
         times = []
         for i in range(0 , signal.shape[0] , sample_length):

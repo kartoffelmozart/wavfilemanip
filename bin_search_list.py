@@ -16,7 +16,7 @@ class BinSearchKVPair(list):
                                           key = ( lambda pair: sorting_key(pair[1]) ) 
                                           if sorting_key is not None 
                                           else lambda pair: pair[1])):
-            if values: values_aux[i] = values[j] 
+            if values is not None: values_aux[i] = values[j] 
             keys_aux.append(key)
         self.extend([BSKVPEntry(key,val) for key,val in zip(keys_aux,values_aux)])
         self.sorting_key = sorting_key

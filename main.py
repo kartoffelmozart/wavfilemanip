@@ -1,15 +1,16 @@
 from wav_tools import *
-from make_some_music import mozart,Am9
+from music import tone_to_frequency
+from time import time
 
-m = Am9(3)
-w = WavFile.empty(m.duration)
-w.writeMusic(m)
-w.saveAt('sounds/Am9.wav')
-w.display(astype=np.int8)
-fr = w.fourierRange(0,.1,frequency_range=(50,1500),n_frequencies=1000)
+bef = time()
 
-top5 = list(fr.prevelantNotesAt(0,5))
-print(*top5,sep='\n')
+w = WavFile('sounds/Den blå anemone.wav')
+fr = w.fourierRange(0,20)
 
-fr.showTransformationAt(0,[tone_to_frequency[tone] for tone in top5])
-
+aft = time()
+print('took',aft-bef)
+for t in (3,5,7,9,11,13,15,17,19):
+    tones = list(fr.prevelantNotesAt(t,10))
+    print(tones)
+    freqs = [tone_to_frequency[tone] for tone in tones]
+    fr.get(t).display()

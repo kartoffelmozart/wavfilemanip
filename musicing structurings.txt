@@ -1,0 +1,141 @@
+clef - G F C octave natural TAB
+time signature
+key signature
+staff
+melody/track/voice
+
+
+decided at score-compilation time:
+ledger line
+bar line
+double bar line - placed to not cut up any voice
+
+
+
+ledger lines 
+bar line
+double bar line
+bold double bar line
+dotted bar line
+brace
+bracket
+
+
+octuple whole note
+quadruple whole note
+double note/breve
+whole note
+half note
+quater note
+eighth note
+sixteenth note
+thirty-second note
+sixty-fourth note
+hundred twenty-eighth note
+two hundred fifty-sixth note
+
+beamed notes
+dotted notes
+ghost notes
+breath marks
+caesura
+
+note relationships:
+tie
+slur/legato
+glissando
+tuplet
+arpeggiated
+
+dynamics:
+pianississimo
+pianissimo
+piano
+mezzo piano
+mezzo forte
+forte
+fortissimo
+fortississimo
+sforzando
+fortepiano
+crescendo
+diminuendo/decsrescendo
+niente
+
+articulation:
+staccato
+staccatissimo/spiccato
+tenuto
+fermata
+accent
+marcato
+
+ornaments: coupled to sequential event
+tremolo
+trill
+upper mordent
+lower mordent
+gruppetto/turn
+appoggiatura
+acciaccatura
+
+
+8va	coupled to an individual staff?
+8vb
+15ma
+15mb
+
+repeat signs 	coupled to the whole sheet?
+simile marks
+volta brackets
+da capo
+dal segno
+segno
+coda sign
+direct symbol (?)
+
+
+bow specifics
+piano specifics
+
+
+
+
+
+sharp
+flat
+
+
+crescendo
+diminuendo
+
+
+sequential event:
+	length/duration given as 1-several node-length-valuesx
+
+tone:
+	pitch/frequency - no key, this is extrapolated using key signature
+	no start or duration
+
+note(sequential event):
+	tone - again no key
+	no start, has a place in a sequence - start beat is extrapolated using time signature
+
+chord(sequential event):
+	tones
+	again no start
+
+rythm notation:
+
+
+
+staff group:
+    holds a number of staves
+	holds number of voices
+	should have 
+	if no preferred 
+
+
+
+write scores from a program
+extrapolate scores from FourierRange
